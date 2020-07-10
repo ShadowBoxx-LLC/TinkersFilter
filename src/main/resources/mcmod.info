@@ -1,0 +1,16 @@
+[
+{
+  "modid": "tinkersfilter",
+  "name": "Tinkers Filter",
+  "description": "A mod for filtering various features in Tinkers Construct (Tools, Parts, Materials, etc)",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Palejack (Maggot)"],
+  "credits": "KnightMiner - for being a helpful person.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["tconstruct"]
+}
+]
