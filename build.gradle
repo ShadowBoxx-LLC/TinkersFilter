@@ -14,11 +14,15 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 repositories {
     flatDir {
-      dirs '../TinkersConstruct/build/libs'
+      dirs '../TConstruct/build/libs'
     }
     maven {
       name 'DVS1 Maven FS'
       url 'http://dvs1.progwml6.com/files/maven'
+    }
+    maven {
+      name = "json"
+      url = "https://mvnrepository.com/artifact/org.json/json"
     }
 }
 
@@ -39,6 +43,8 @@ minecraft {
 }
 
 dependencies {
+    compile "org.json:json:20200518"
+
     deobfCompile ("slimeknights:TConstruct:${minecraft_version}-${tconstruct_version}") {
         exclude group: 'mezz.jei'
     }
