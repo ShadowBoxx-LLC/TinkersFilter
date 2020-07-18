@@ -5,8 +5,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import me.jaredhewitt.tinkersfilter.Config;
-
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = TinkersFilter.MODID, name = TinkersFilter.NAME, version = TinkersFilter.VERSION)
