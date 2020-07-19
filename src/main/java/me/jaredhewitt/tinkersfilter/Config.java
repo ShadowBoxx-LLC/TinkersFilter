@@ -16,6 +16,7 @@ public final class Config {
   private Config() {
   }
   
+  public static boolean generalDebug = false;
   public static boolean debugPrintToolStation = false;
   public static boolean debugPrintToolForge = false;
   public static boolean debugPrintStencilTable = false;
@@ -27,6 +28,7 @@ public final class Config {
   
   static ConfigCategory Debug;
   static ConfigCategory Blacklists;
+  static ConfigCategory General;
   
   public static void load(FMLPreInitializationEvent event) {
     configFile = new Configuration(event.getSuggestedConfigurationFile(), "0.1", false);
@@ -46,7 +48,7 @@ public final class Config {
   public static boolean syncConfig() {
     Property prop;
     {
-      String category = "debug";
+      String category = "Registry Debug";
       List<String> propertyOrder = Lists.newArrayList();
       Debug = configFile.getCategory(category);
       
@@ -68,7 +70,7 @@ public final class Config {
       Debug.setPropertyOrder(propertyOrder);
     }
     {
-      String category = "blacklists";
+      String category = "Registry Blacklists";
       List<String> propertyOrder = Lists.newArrayList();
       Blacklists = configFile.getCategory(category);
       
@@ -88,6 +90,18 @@ public final class Config {
       propertyOrder.add(prop.getName());
       
       Blacklists.setPropertyOrder(propertyOrder);
+    }
+    {
+      String category = "General";
+      List<String> propertyOrder = Lists.newArrayList();
+      General = configFile.getCategory(category);
+      
+      prop = configFile.get(category, "General Debugging Info", generalDebug);
+      prop.setComment("You should probably leave this false! Setting it to true spams the logfile with information that is useful to developers.");
+      generalDebug = prop.getBoolean();
+      propertyOrder.add(prop.getName());
+      
+      General.setPropertyOrder(propertyOrder);
     }
     
     boolean changed = false;

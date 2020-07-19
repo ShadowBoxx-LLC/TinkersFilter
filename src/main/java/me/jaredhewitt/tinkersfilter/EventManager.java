@@ -1,7 +1,8 @@
 package me.jaredhewitt.tinkersfilter;
 
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.json.*;
+
+import java.util.Arrays;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,20 +11,18 @@ import slimeknights.tconstruct.library.events.TinkerRegisterEvent.*;
 
 public final class EventManager {
   private static Logger logger = LogManager.getLogger();
-  private boolean debugPrint = false;
-  
+  private static boolean debugPrint = Config.generalDebug;
+
   @SubscribeEvent
   public void onToolStationCraftingRegisterEvent (ToolStationCraftingRegisterEvent event) {
     String registeredTool = event.getRecipe().getRegistryName().toString();
     boolean blacklist = false;
     
-    for (String entry : Config.toolStationBlacklist) {
+    if (Arrays.asList(Config.toolStationBlacklist).contains(registeredTool)) {
       if (debugPrint) {
-        logger.info(TinkersFilter.MODID + ": The tool " + entry + " was added to the tool station blacklist");
+        logger.info(TinkersFilter.MODID + ": Blacklisting tool " + registeredTool + " from the Tool Station");
       }
-      if (entry.equals(registeredTool)) {
-        blacklist = true;
-      }
+      blacklist = true;
     }
     
     if (!blacklist && Config.debugPrintToolStation) {
@@ -37,13 +36,11 @@ public final class EventManager {
     String registeredTool = event.getRecipe().getRegistryName().toString();
     boolean blacklist = false;
     
-    for (String entry : Config.toolForgeBlacklist) {
+    if (Arrays.asList(Config.toolForgeBlacklist).contains(registeredTool)) {
       if (debugPrint) {
-        logger.info(TinkersFilter.MODID + ": The tool " + entry + " was added to the tool forge blacklist");
+        logger.info(TinkersFilter.MODID + ": Blacklisting tool " + registeredTool + " from the Tool Forge");
       }
-      if (entry.equals(registeredTool)) {
-        blacklist = true;
-      }
+      blacklist = true;
     }
     
     if (!blacklist && Config.debugPrintToolForge) {
@@ -54,18 +51,14 @@ public final class EventManager {
   
   @SubscribeEvent
   public void onStencilTableCraftingRegisterEvent (StencilTableCraftingRegisterEvent event) {
-    String NBTCompoundString = event.getRecipe().getTagCompound().toString();
-    JSONObject NBTCompoundObj = new JSONObject(NBTCompoundString);
-    String registeredPattern = NBTCompoundObj.getString("PartType");
+    String registeredPattern = event.getRecipe().getTagCompound().getString("PartType");
     boolean blacklist = false;
     
-    for (String entry : Config.stencilTableBlacklist) {
+    if (Arrays.asList(Config.stencilTableBlacklist).contains(registeredPattern)) {
       if (debugPrint) {
-        logger.info(TinkersFilter.MODID + ": The tool part " + entry + " was added to the sketching table blacklist");
+        logger.info(TinkersFilter.MODID + ": Blacklisting pattern " + registeredPattern + " from the Stencil Table");
       }
-      if (entry.equals(registeredPattern)) {
-        blacklist = true;
-      }
+      blacklist = true;
     }
     
     if (!blacklist && Config.debugPrintStencilTable) {
