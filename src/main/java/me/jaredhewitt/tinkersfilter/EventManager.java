@@ -40,8 +40,8 @@ public final class EventManager {
   @SubscribeEvent
   public void onIntegrationEvent (IntegrationEvent event) {
     if (debugPrint) logger.info(TinkersFilter.MODID + ": Entered onIntegrationEvent");
-    if (event.material == null || event.materialIntegration == null) return;
-    String registeredMaterial = event.material.getIdentifier();
+    if (event.material == null || event.materialIntegration.material == null) return;
+    String registeredMaterial = event.material.getIdentifier(); 
     String registeredIntegration = event.materialIntegration.material.getIdentifier();
     boolean blacklist = false;
 
