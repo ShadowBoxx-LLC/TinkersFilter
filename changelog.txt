@@ -2,6 +2,7 @@
 - Mod is now capable of filtering recipes from the Materials list, Traits list, Modifiers list, Melting list, Entity Melting list, Alloy list and the Drying Rack
 - Added some extra precautions to each event listener to make sure the required parameters are available, and if not, fail gracefully without crashing
 - Added some extra debugging output
+- Corrected a bug with a null value in onIntegrationEvent listener
 
 7/22/2020
 - Mod is capable of filtering tools from the Tool Station, Tool Forge and patterns from the Stencil Table
